@@ -7,6 +7,13 @@
     <title>Booking Successful</title>
 </head>
 <body>
-    
+    <div id="print">
+        Thank You <%= Name %> for booking!
+        Your Stay from <%= cid %> to <%= cod %> is confirmed
+        Room type <%= type %> 
+        Room No. <%= rn %> 
+    </div>
+    <br>
+    <button onclick="window.print()">Print</button>
 </body>
 </html>

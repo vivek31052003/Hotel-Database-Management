@@ -57,13 +57,16 @@ app.post("/contact",(req,res) => {
     res.redirect('/');
 });
 
+var ac=100;
+var nac=200;
+
 app.post("/book",(req,res) => {
     const username=req.body.username;
     const password=req.body.password; 
     const type=req.body.room;
     const cid=req.body.cid;
     const cod=req.body.cod;
-    var name;
+    var name=req.body.name;
 
     connection.query(
         'SELECT * FROM users WHERE username=(?)',
@@ -73,9 +76,16 @@ app.post("/book",(req,res) => {
                 console.log(err);
             }
             if(results.length>0) {
-                if(results[0].password==password) {
-                    name='SELECT Name from users WHERE username=(?)',username;
-                    res.render("bookingconf");
+                if(results[0].password==password) {                    
+                    var rn;
+                    if(type=='AC') {                        
+                        ac++;  
+                        rn=ac;                      
+                    } else {
+                        nac++;
+                        rn=nac;
+                    }
+                    res.render("bookingconf",{Name:name,cid:cid,cod:cod,type:type,rn:rn});
                 }
             }
         }
