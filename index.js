@@ -71,7 +71,7 @@ app.post("/book",(req,res) => {
     const type=req.body.room;
     const cid=req.body.cid;
     const cod=req.body.cod;
-    var name=req.body.name;
+    var name=req.body.Name;
 
     connection.query(
         'SELECT * FROM users WHERE username=(?)',
