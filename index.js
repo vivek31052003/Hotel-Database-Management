@@ -1,7 +1,7 @@
 const express=require("express");
 const mysql=require("mysql2");
 const bodyparser=require("body-parser"); 
-var connection = require('./database');
+var connection=require('./database');
 
 const app=express();
 
@@ -10,11 +10,11 @@ app.use(express.static("public"));
 app.use(bodyparser.urlencoded({extended:true}));
 
 app.get("/",(req,res) => {
-    res.render('index');
+    res.render("index");
 });
 
 app.get("/about",(req,res) => {
-    res.render('about');
+    res.render("about");
 });
 
 app.get("/register",(req,res) => {
@@ -39,9 +39,14 @@ app.post("/register",(req,res) => {
     connection.query(
         'INSERT INTO users VALUES (?,?,?,?,?)',
         [username,password,Name,mail,number],
-        console.log("inserted!!!!")        
+        (err,results) => {
+            if(err) {
+                res.render("regerr");
+            } else {
+                res.redirect('/');
+            }
+        }          
     )
-    res.redirect('/');
 });
 
 app.post("/contact",(req,res) => {
@@ -74,6 +79,7 @@ app.post("/book",(req,res) => {
         (err,results) => {
             if(err) {
                 console.log(err);
+                res.render("bookerr");             
             }
             if(results.length>0) {
                 if(results[0].password==password) {                    
@@ -86,7 +92,11 @@ app.post("/book",(req,res) => {
                         rn=nac;
                     }
                     res.render("bookingconf",{Name:name,cid:cid,cod:cod,type:type,rn:rn});
+                } else {
+                    res.render("bookerr");    
                 }
+            } else {
+                res.render("bookerr");    
             }
         }
     ) 
@@ -98,4 +108,4 @@ app.listen(3000,() => {
         if(err) throw err;
         console.log('Database connected');
     });
-})
+});
