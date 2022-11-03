@@ -1,9 +1,11 @@
 var mysql = require("mysql2");
+require("dotenv").config();
+
 
 var connection = mysql.createConnection({
     user: 'root',
     host: 'localhost',
-    password: 'Preetham@924',
+    password: process.env.password,
     database: 'hoteldb'
 });
 
