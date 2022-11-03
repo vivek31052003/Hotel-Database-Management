@@ -40,6 +40,20 @@ app.post("/register",(req,res) => {
     res.redirect('/');
 });
 
+app.post("/contact",(req,res) => {
+    const name=req.body.name;
+    const mail=req.body.mail;
+    const message=req.body.message;
+
+    connection.query(
+        'INSERT INTO contact VALUES (?,?,?)',
+        [name,mail,message],
+        console.log("inserted!!!!")
+    )
+    res.redirect('/');
+
+});
+
 app.listen(3000,() => {
     console.log('Server on board');
     connection.connect((err) => {
