@@ -10,20 +10,20 @@ app.use(express.static("public"));
 app.use(bodyparser.urlencoded({extended:true}));
 
 app.get("/",(req,res) => {
-    connection.query(
-        'SELECT * FROM users',
-        (err,results) => {
-            if(err) {
-                throw err;
-            }
-            res.send(results);
-        }
-    )  
+    res.render('index');
+});
+
+app.get("/about",(req,res) => {
+    res.render('about');
 });
 
 app.get("/register",(req,res) => {
     res.render("register");
-})
+});
+
+app.get("/contact",(req,res) => {
+    res.render("contact");
+});
 
 app.post("/register",(req,res) => {
     const username=req.body.username;
