@@ -7,13 +7,27 @@
     <title>Booking Successful</title>
 </head>
 <body>
-    <div id="print">
+    <div id="printC">
         Thank You <%= Name %> for booking!
         Your Stay from <%= cid %> to <%= cod %> is confirmed
         Room type <%= type %> 
         Room No. <%= rn %> 
     </div>
     <br>
-    <button onclick="window.print()">Print</button>
+    <button onclick="printDiv('printC')">Print</button>
+
+    <script>
+        function printDiv(divName){
+            var printContents = document.getElementById(divName).innerHTML;
+            var originalContents = document.body.innerHTML;
+    
+            document.body.innerHTML = printContents;
+    
+            window.print();
+    
+            document.body.innerHTML = originalContents;
+        }
+    </script>
 </body>
 </html>
+
