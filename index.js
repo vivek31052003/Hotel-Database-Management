@@ -25,6 +25,10 @@ app.get("/contact",(req,res) => {
     res.render("contact");
 });
 
+app.get("/book",(req,res) => {
+    res.render("book");
+});
+
 app.post("/register",(req,res) => {
     const username=req.body.username;
     const password=req.body.password;
@@ -35,7 +39,7 @@ app.post("/register",(req,res) => {
     connection.query(
         'INSERT INTO users VALUES (?,?,?,?,?)',
         [username,password,Name,mail,number],
-        console.log("inserted!!!!")
+        console.log("inserted!!!!")        
     )
     res.redirect('/');
 });
@@ -51,7 +55,31 @@ app.post("/contact",(req,res) => {
         console.log("inserted!!!!")
     )
     res.redirect('/');
+});
 
+app.post("/book",(req,res) => {
+    const username=req.body.username;
+    const password=req.body.password; 
+    const type=req.body.room;
+    const cid=req.body.cid;
+    const cod=req.body.cod;
+    var name;
+
+    connection.query(
+        'SELECT * FROM users WHERE username=(?)',
+        [username],
+        (err,results) => {
+            if(err) {
+                console.log(err);
+            }
+            if(results.length>0) {
+                if(results[0].password==password) {
+                    name='SELECT Name from users WHERE username=(?)',username;
+                    res.render("bookingconf");
+                }
+            }
+        }
+    ) 
 });
 
 app.listen(3000,() => {
