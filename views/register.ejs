@@ -32,7 +32,7 @@
             <h2 class="l-heading"><span class="primary-text">Sign Up</span></h2>
             <p>Create New Account</p>
 
-            <form action="process.php">
+            <form action="/register" method="post">
                 <div class="form-group">
                     <label for="username">Username</label>
                     <input type="text" name="username" id="username">
@@ -43,15 +43,15 @@
                 </div>
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" name="name" id="name">
+                    <input type="text" name="Name" id="name">
                 </div>
                 <div class="form-group">
                     <label for="email">E-mail</label>
-                    <input type="email" name="email" id="email">
+                    <input type="email" name="mail" id="email">
                 </div>
                 <div class="form-group">
                     <label for="contact">Contact No</label>
-                    <input type="number" name="contact" id="contact">
+                    <input type="number" name="number" id="contact">
                 </div>
                 <br>
                 <button type="submit" class="btn">Submit</button>

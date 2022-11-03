@@ -27,9 +27,14 @@ app.get("/contact",(req,res) => {
 
 app.post("/register",(req,res) => {
     const username=req.body.username;
+    const password=req.body.password;
+    const Name=req.body.Name;
+    const mail=req.body.mail;
+    const number=req.body.number;
+
     connection.query(
         'INSERT INTO users VALUES (?,?,?,?,?)',
-        [username,],
+        [username,password,Name,mail,number],
         console.log("inserted!!!!")
     )
     res.redirect('/');
