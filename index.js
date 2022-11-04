@@ -1,5 +1,4 @@
 const express=require("express");
-const mysql=require("mysql2");
 const bodyparser=require("body-parser"); 
 var connection=require('./database');
 
@@ -64,7 +63,7 @@ app.post("/contact",(req,res) => {
 
 var ac=100;
 var nac=200;
-var bid=59283748384112;
+var bid=59283748384110;
 
 app.post("/book",(req,res) => {
     const username=req.body.username;
@@ -96,6 +95,11 @@ app.post("/book",(req,res) => {
                     connection.query(
                         'INSERT INTO booking VALUES (?,?,?,?,?,?)',
                         [bid,username,rn,type,cid,cod],
+                        (err,results) => {
+                            if(err) {
+                                res.render("bookerr");
+                            }
+                        }
                     )
                     res.render("bookingconf",{Name:name,cid:cid,cod:cod,type:type,rn:rn,bid:bid});
                 } else {
