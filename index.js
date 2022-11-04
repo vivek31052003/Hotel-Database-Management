@@ -64,6 +64,7 @@ app.post("/contact",(req,res) => {
 
 var ac=100;
 var nac=200;
+var bid=59283748384112;
 
 app.post("/book",(req,res) => {
     const username=req.body.username;
@@ -91,7 +92,8 @@ app.post("/book",(req,res) => {
                         nac++;
                         rn=nac;
                     }
-                    res.render("bookingconf",{Name:name,cid:cid,cod:cod,type:type,rn:rn});
+                    bid++;
+                    res.render("bookingconf",{Name:name,cid:cid,cod:cod,type:type,rn:rn,bid:bid});
                 } else {
                     res.render("bookerr");    
                 }
