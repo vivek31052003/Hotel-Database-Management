@@ -93,6 +93,10 @@ app.post("/book",(req,res) => {
                         rn=nac;
                     }
                     bid++;
+                    connection.query(
+                        'INSERT INTO booking VALUES (?,?,?,?,?,?)',
+                        [bid,username,rn,type,cid,cod],
+                    )
                     res.render("bookingconf",{Name:name,cid:cid,cod:cod,type:type,rn:rn,bid:bid});
                 } else {
                     res.render("bookerr");    
