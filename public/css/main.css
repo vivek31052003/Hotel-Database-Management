@@ -287,3 +287,19 @@ footer{
     color: #f4f4f4;
     padding: 20px;
 }
+
+select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#hide {
+    display: none;
+    visibility: hidden;
+    padding-right: 10px;
+}
