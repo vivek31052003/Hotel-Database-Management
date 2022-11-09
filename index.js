@@ -28,6 +28,10 @@ app.get("/book",(req,res) => {
     res.render("book");
 });
 
+app.get("/cancel",(req,res) => {
+    res.render("cancel");
+});
+
 app.post("/register",(req,res) => {
     const username=req.body.username;
     const password=req.body.password;
@@ -48,6 +52,19 @@ app.post("/register",(req,res) => {
     )
 });
 
+app.post("/contact",(req,res) => {
+    const name=req.body.name;
+    const mail=req.body.mail;
+    const message=req.body.message;
+
+    connection.query(
+        'INSERT INTO contact VALUES (?,?,?)',
+        [name,mail,message],
+        console.log("inserted!!!!")
+    )
+    res.redirect('/');
+});
+
 var bid;
 function bookingID()  {
     var id;
@@ -61,19 +78,6 @@ function bookingID()  {
     );    
     return id;
 }
-
-app.post("/contact",(req,res) => {
-    const name=req.body.name;
-    const mail=req.body.mail;
-    const message=req.body.message;
-
-    connection.query(
-        'INSERT INTO contact VALUES (?,?,?)',
-        [name,mail,message],
-        console.log("inserted!!!!")
-    )
-    res.redirect('/');
-});
 
 var ac=100;
 var nac=200;
@@ -185,21 +189,34 @@ app.post("/book",(req,res) => {
         }
     ) 
 });
-// app.post(/"cancel",(req,res)=>{
-//     const username=req.body.username;
-//     const password=req.body.password; 
-//     const id=req.body.id;
-//     connection.query('DELETE * FROM booking where bookingID=(?)',
-//     [id],(err,res)=>{
-//         if(err){
-//             console.log(err);
-//             res.render("bookerr2");
-//         }
-//         else{
-//             console.log("done");
-//         }
-//     })
-// })
+
+app.post("/cancel",(req,res) => {
+    const bookingid=req.body.bookingid; 
+    const password=req.body.password;  
+    connection.query(
+        'SELECT username FROM booking WHERE bookingID=(?)',
+        [bookingid],
+        (err,results) => {
+            if(err) throw err;
+            var un=results[0].username;                        
+            connection.query(
+                'SELECT password FROM users where username=(?)',
+                un,
+                (err,results) => {
+                    if(err) throw err;
+                    var pwd=results[0].password;                    
+                    if(password==pwd) {
+                        connection.query(
+                            'DELETE FROM booking WHERE bookingID=(?)',
+                            bookingid,
+                            res.redirect("/")
+                        )
+                    }
+                }
+            )
+        }
+    ) 
+});
 
 app.listen(3000,() => {
     var lol=bookingID();
