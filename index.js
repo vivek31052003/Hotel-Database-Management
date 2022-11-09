@@ -48,7 +48,6 @@ app.post("/register",(req,res) => {
     )
 });
 
-
 var bid;
 function bookingID()  {
     var id;
