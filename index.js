@@ -186,6 +186,21 @@ app.post("/book",(req,res) => {
         }
     ) 
 });
+// app.post(/"cancel",(req,res)=>{
+//     const username=req.body.username;
+//     const password=req.body.password; 
+//     const id=req.body.id;
+//     connection.query('DELETE * FROM booking where bookingID=(?)',
+//     [id],(err,res)=>{
+//         if(err){
+//             console.log(err);
+//             res.render("bookerr2");
+//         }
+//         else{
+//             console.log("done");
+//         }
+//     })
+// })
 
 app.listen(3000,() => {
     var lol=bookingID();
