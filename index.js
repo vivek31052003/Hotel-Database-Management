@@ -48,6 +48,21 @@ app.post("/register",(req,res) => {
     )
 });
 
+
+var bid;
+function bookingID()  {
+    var id;
+    connection.query (
+        'SELECT * FROM ids',
+        (err,results) => {
+            if(err) throw err;                            
+            id=results[0].bookid;  
+            bid=id;                      
+        }
+    );    
+    return id;
+}
+
 app.post("/contact",(req,res) => {
     const name=req.body.name;
     const mail=req.body.mail;
@@ -63,7 +78,6 @@ app.post("/contact",(req,res) => {
 
 var ac=100;
 var nac=200;
-var bid=59283748384110;
 
 app.post("/book",(req,res) => {
     const username=req.body.username;
@@ -71,8 +85,7 @@ app.post("/book",(req,res) => {
     const type=req.body.room;
     const cid=req.body.cid;
     const cod=req.body.cod;
-    var name=req.body.Name;
-
+    var name=req.body.Name;    
     connection.query(
         'SELECT * FROM users WHERE username=(?)',
         [username],
@@ -90,8 +103,12 @@ app.post("/book",(req,res) => {
                     } else {
                         nac++;
                         rn=nac;
-                    }
-                    bid++;
+                    }                                                        
+                    console.log(bid);
+                    connection.query (
+                        'UPDATE ids SET bookid=(?) WHERE bookid=(?)',
+                        [bid+1,bid]
+                    );                                                        
                     connection.query(
                         'INSERT INTO booking VALUES (?,?,?,?,?,?)',
                         [bid,username,rn,type,cid,cod],
@@ -100,8 +117,9 @@ app.post("/book",(req,res) => {
                                 res.render("bookerr");
                             }
                         }
-                    )
+                    )                    
                     res.render("bookingconf",{Name:name,cid:cid,cod:cod,type:type,rn:rn,bid:bid});
+                    bid++;
                 } else {
                     res.render("bookerr");    
                 }
@@ -113,7 +131,8 @@ app.post("/book",(req,res) => {
 });
 
 app.listen(3000,() => {
-    console.log('Server on board');
+    var lol=bookingID();
+    console.log('Server on board');    
     connection.connect((err) => {
         if(err) throw err;
         console.log('Database connected');
