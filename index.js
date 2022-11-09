@@ -85,7 +85,8 @@ app.post("/book",(req,res) => {
     const type=req.body.room;
     const cid=req.body.cid;
     const cod=req.body.cod;
-    var name=req.body.Name;    
+    var name=req.body.Name; 
+
     connection.query(
         'SELECT * FROM users WHERE username=(?)',
         [username],
@@ -94,41 +95,112 @@ app.post("/book",(req,res) => {
                 console.log(err);
                 res.render("bookerr");             
             }
-            if(results.length>0) {
-                if(results[0].password==password) {                    
-                    var rn;
-                    if(type=='AC') {                        
-                        ac++;  
-                        rn=ac;                      
-                    } else {
-                        nac++;
-                        rn=nac;
-                    }                                                        
-                    console.log(bid);
-                    connection.query (
-                        'UPDATE ids SET bookid=(?) WHERE bookid=(?)',
-                        [bid+1,bid]
-                    );                                                        
-                    connection.query(
-                        'INSERT INTO booking VALUES (?,?,?,?,?,?)',
-                        [bid,username,rn,type,cid,cod],
-                        (err,results) => {
-                            if(err) {
-                                res.render("bookerr");
-                            }
+            if(type=='AC'){
+                connection.query('SELECT * FROM booking WHERE (NOT(cid<=(?) AND cod<=(?)) OR (cid>=(?) AND cod>=(?))) AND Type="AC"',
+            [cid,cid,cod,cod],(err,resul) =>
+            {   if(err){console.log(err);}
+                if(resul.length<=2){
+                    if(results.length>0) {
+                        if(results[0].password==password) {                    
+                            var rn;
+                            if(type=='AC') {                        
+                                ac++;  
+                                rn=ac;                      
+                            } else {
+                                nac++;
+                                rn=nac;
+                            }                                                        
+                            console.log(bid);
+                            connection.query (
+                                'UPDATE ids SET bookid=(?) WHERE bookid=(?)',
+                                [bid+1,bid]
+                            );                                                        
+                            connection.query(
+                                'INSERT INTO booking VALUES (?,?,?,?,?,?)',
+                                [bid,username,rn,type,cid,cod],
+                                (err,results) => {
+                                    if(err) {
+                                        res.render("bookerr");
+                                    }
+                                }
+                            )                    
+                            res.render("bookingconf",{Name:name,cid:cid,cod:cod,type:type,rn:rn,bid:bid});
+                            bid++;
+                        } else {
+                            res.render("bookerr");    
                         }
-                    )                    
-                    res.render("bookingconf",{Name:name,cid:cid,cod:cod,type:type,rn:rn,bid:bid});
-                    bid++;
-                } else {
-                    res.render("bookerr");    
+                    } else {
+                        res.render("bookerr");    
+                    }
                 }
-            } else {
-                res.render("bookerr");    
-            }
+                else{
+                    console.log(""); 
+                    res.render("bookerr1");  
+                }
+            })
+            }else{
+            connection.query('SELECT * FROM booking WHERE (NOT(cid<=(?) AND cod<=(?)) OR (cid>=(?) AND cod>=(?))) AND Type="non-AC"',
+            [cid,cid,cod,cod],(err,resul) =>
+            {   if(err){console.log(err);}
+                if(resul.length<=2){
+                    if(results.length>0) {
+                        if(results[0].password==password) {                    
+                            var rn;
+                            if(type=='AC') {                        
+                                ac++;  
+                                rn=ac;                      
+                            } else {
+                                nac++;
+                                rn=nac;
+                            }                                                        
+                            console.log(bid);
+                            connection.query (
+                                'UPDATE ids SET bookid=(?) WHERE bookid=(?)',
+                                [bid+1,bid]
+                            );                                                        
+                            connection.query(
+                                'INSERT INTO booking VALUES (?,?,?,?,?,?)',
+                                [bid,username,rn,type,cid,cod],
+                                (err,results) => {
+                                    if(err) {
+                                        res.render("bookerr");
+                                    }
+                                }
+                            )                    
+                            res.render("bookingconf",{Name:name,cid:cid,cod:cod,type:type,rn:rn,bid:bid});
+                            bid++;
+                        } else {
+                            res.render("bookerr");    
+                        }
+                    } else {
+                        res.render("bookerr");    
+                    }
+                }
+                else{
+                    console.log("done"); 
+                    res.render("bookerr1");  
+                }
+            })
+        }
+            
         }
     ) 
 });
+// app.post(/"cancel",(req,res)=>{
+//     const username=req.body.username;
+//     const password=req.body.password; 
+//     const id=req.body.id;
+//     connection.query('DELETE * FROM booking where bookingID=(?)',
+//     [id],(err,res)=>{
+//         if(err){
+//             console.log(err);
+//             res.render("bookerr2");
+//         }
+//         else{
+//             console.log("done");
+//         }
+//     })
+// })
 
 app.listen(3000,() => {
     var lol=bookingID();
