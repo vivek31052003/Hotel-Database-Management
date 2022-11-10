@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyHotel | Book</title>
+    <title>MyHotel | Availability</title>
     <script src="https://kit.fontawesome.com/d2a386da24.js" crossorigin="anonymous"></script>
     <link rel="icon" href="favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="css/main.css">
@@ -31,21 +31,10 @@
 
     <section id="contact-form" class="py-3">
         <div class="container">
-            <h2 class="l-heading"><span class="primary-text">Book Now</span></h2>            
+            <h2 class="l-heading"><span class="primary-text">Availability</span></h2>            
 
-            <form action="/book" method="post">
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" name="username" id="username">
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" name="password" id="password">
-                </div>
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" name="Name" id="name">
-                </div>
+            <form action="/avl" method="post">                
+                
                 <div class="form-group">
                     <label for="checkIN">Check-in Date</label>
                     <input type="date" name="cid" id="checkIN">
@@ -64,9 +53,8 @@
                 </div>
                             
                 <br>
-                <button type="submit" class="btn">Book</button>   
-                <p>Wanna <a href="/cancel">Cancel</a> booking?</p>       
-                <p><a href="/avl">Check</a> availability</p>             
+                <button type="submit" class="btn">Check Availability</button>   
+                <p>Back to <a href="/book">booking</a></p>             
             </form>
         </div>
     </section>

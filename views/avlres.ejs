@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyHotel | Availability</title>
+    <script src="https://kit.fontawesome.com/d2a386da24.js" crossorigin="anonymous"></script>
+    <link rel="icon" href="favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" media="screen and (max-width:768px)" href="css/mobile.css">    
+</head>
+
+<body>
+    <header>
+        <nav id="nav-bar">
+            <div class="container">
+
+                <h1 class="logo"><a href="/">MyHotel</a></h1>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a  href="/about">About</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                    <li><a href="/register">Register</a></li>
+                    <li><a class="current" href="/book">Book</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+
+    <section id="contact-form" class="py-3">
+        <div class="container">
+            <h2 class="l-heading"><span class="primary-text">Availability</span></h2>            
+            <h1>Rooms Available</h1>
+            <%= rooms %> 
+            <p>Back to <a href="/book">booking</a></p>
+            <p><a href="/avl">Check</a> availability</p>             
+        </div>
+    </section>
+    <div style="position: fixed;left: 0;bottom: 0;width: 100%;">
+        <section class="contact-info bg-dark">
+            <div class="container">
+                <div class="box">
+                    <i class="fas fa-hotel fa-3x"></i>
+                    <h3>Location</h3>
+                    <p>432, Outer Circle, CP, New Delhi</p>
+                </div>
+                <div class="box">
+                    <i class="fas fa-phone fa-3x"></i>
+                    <h3>Contact</h3>
+                    <p>123-456-7890
+                    </p>
+                </div>
+                <div class="box">
+                    <i class="fas fa-envelope fa-3x"></i>
+                    <h3>Email</h3>
+                    <p>abc@xyz.com</p>
+                </div>
+    
+            </div>
+        </section>
+    
+    
+        <footer id="main-footer">
+            <p>Copyright &copy; 2020, All Rights Reserved</p>
+        </footer>
+    </div>
+</body>
+
+</html>
