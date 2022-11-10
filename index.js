@@ -99,7 +99,7 @@ app.post("/book",(req,res) => {
                 res.render("bookerr");             
             }
             if(type=='AC'){
-                connection.query('SELECT * FROM booking WHERE (NOT(cid<=(?) AND cod<=(?)) OR (cid>=(?) AND cod>=(?))) AND Type="AC"',
+                connection.query('SELECT * FROM booking WHERE (NOT((cid<=(?) AND cod<=(?)) OR (cid>=(?) AND cod>=(?)))) AND Type="AC"',
             [cid,cid,cod,cod],(err,resul) =>
             {   if(err){console.log(err);}
                 if(resul.length<=2){
@@ -142,7 +142,7 @@ app.post("/book",(req,res) => {
                 }
             })
             }else{
-            connection.query('SELECT * FROM booking WHERE (NOT(cid<=(?) AND cod<=(?)) OR (cid>=(?) AND cod>=(?))) AND Type="non-AC"',
+            connection.query('SELECT * FROM booking WHERE (NOT((cid<=(?) AND cod<=(?)) OR (cid>=(?) AND cod>=(?)))) AND Type="non-AC"',
             [cid,cid,cod,cod],(err,resul) =>
             {   if(err){console.log(err);}
                 if(resul.length<=2){
