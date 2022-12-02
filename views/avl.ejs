@@ -4,12 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyHotel | Register</title>
-    <link rel="icon" href="favicon.png" type="image/x-icon">
+    <title>MyHotel | Availability</title>
     <script src="https://kit.fontawesome.com/d2a386da24.js" crossorigin="anonymous"></script>
+    <link rel="icon" href="favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" media="screen and (max-width:768px)" href="css/mobile.css">
-</head>
+    <link rel="stylesheet" media="screen and (max-width:768px)" href="css/mobile.css">    
 </head>
 
 <body>
@@ -22,41 +21,40 @@
                     <li><a href="/">Home</a></li>
                     <li><a  href="/about">About</a></li>
                     <li><a href="/contact">Contact</a></li>
-                    <li><a class="current" href="/register">Register</a></li>
-                    <li><a href="/book">Book</a></li>
+                    <li><a href="/register">Register</a></li>
+                    <li><a class="current" href="/book">Book</a></li>
                 </ul>
             </div>
         </nav>
     </header>
 
+
     <section id="contact-form" class="py-3">
         <div class="container">
-            <h2 class="l-heading"><span class="primary-text">Sign Up</span></h2>
-            <p>Create New Account</p>
+            <h2 class="l-heading"><span class="primary-text">Availability</span></h2>            
 
-            <form action="/register" method="post">
+            <form action="/avl" method="post">                
+                
                 <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" name="username" id="username">
+                    <label for="checkIN">Check-in Date</label>
+                    <input type="date" name="cid" id="checkIN">
                 </div>
                 <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" name="password" id="password">
+                    <label for="checkOUT">Check-out Date</label>
+                    <input type="date" name="cod" id="checkOUT">
                 </div>
                 <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" name="Name" id="name">
+                    <label for="rooms">Choose room type</label>
+                    <select name="room" id="rooms">
+                        <option value="hide" id="hide">Select Room</option>
+                        <option value="AC">AC</option>
+                        <option value="non-AC">non-AC</option>                        
+                    </select>
                 </div>
-                <div class="form-group">
-                    <label for="email">E-mail</label>
-                    <input type="email" name="mail" id="email">
-                </div>
-                <div class="form-group">
-                    <label for="contact">Contact No</label>
-                    <input type="number" name="number" id="contact">
-                </div>
+                            
                 <br>
-                <button type="submit" class="btn">Submit</button>
+                <button type="submit" class="btn">Check Availability</button>   
+                <p>Back to <a href="/book">booking</a></p>             
             </form>
         </div>
     </section>
@@ -81,9 +79,6 @@
 
         </div>
     </section>
-
-
-
 
 
     <footer id="main-footer">
