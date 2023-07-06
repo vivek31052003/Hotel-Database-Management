@@ -75,9 +75,11 @@ function bookingID()  {
     connection.query (
         'SELECT * FROM ids',
         (err,results) => {
-            if(err) throw err;                            
-            id=results[0].bookid;
-            bid=id;                      
+            if(err) throw err;
+            if(results.length) {
+                id=results[0].bookid;
+                bid=id; 
+            }                               
         }
     );    
     return id;
