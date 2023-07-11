@@ -18,6 +18,9 @@ a {
     text-decoration: none;
     color: #333;
 }
+a:hover{
+    color: #cb4c3a;
+}
 
 h1 , h2 , h3 {
     padding-bottom: 20px;
