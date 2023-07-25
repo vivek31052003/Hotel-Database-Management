@@ -256,10 +256,11 @@ app.post("/avl",(req,res) => {
 });
 
 app.listen(3000,() => {
-    var lol=bookingID();
+    
     console.log('Server on board');    
     connection.connect((err) => {
         if(err) throw err;
         console.log('Database connected');
+        bookingID();
     });
 });
